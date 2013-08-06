@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>DependencySharp</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <title>DependencySharp</title>
         <authors>Evan Wondrasek</authors>
         <projectUrl>https://github.com/evanwon/dependencysharp</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Unmanaged Dependencies Suck™
 This library allows you to embed unmanaged dependencies within your managed code (as a byte array), and at runtime check if the dependency exists in a specified location. If it doesn't, the dependency is automatically written to the correct location.</description>
-        <releaseNotes>Fixed: Attempts to create destination directory if it doesn't exist.</releaseNotes>
+        <releaseNotes>Fixed: If file exists (but is wrong filesize or version), tries to make file writeable before overwriting it with a new file.</releaseNotes>
         <copyright>Copyright © Evan Wondrasek 2013</copyright>
         <tags>dependency</tags>
         <frameworkAssemblies>

@@ -14,6 +14,17 @@ namespace DependencySharp
                 Directory.CreateDirectory(directoryPath);
             }
 
+            if (File.Exists(path))
+            {
+                // Make sure file is writeable if it already exists
+                var fileInfo = new FileInfo(path);
+
+                if (fileInfo.IsReadOnly)
+                {
+                    fileInfo.IsReadOnly = false;
+                }
+            }
+
             File.WriteAllBytes(path, data);
         }
     }
