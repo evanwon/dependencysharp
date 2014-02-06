@@ -11,7 +11,7 @@ This library allows you to embed unmanaged dependencies within your managed code
 
 ## Usage ##
 
-1. Add your unmanaged dependencies to your managed library as a binary resource. 
+1. Add your unmanaged dependencies to your managed library as a byte resource. 
   1. To do this: Navigate to **Project Properties** in Visual Studio
   2. Click the **Resources** tab (a prompt may notify you that a default Resources file does not exist - create it)
   3. Click **Add Resource** and select the unmanaged dependency. It will now be added to your project as a byte array.
