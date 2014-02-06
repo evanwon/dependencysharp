@@ -18,20 +18,27 @@ This library allows you to embed unmanaged dependencies within your managed code
 
 Before you call a method that requires an external dependency, use DependencySharp to check for its existence, and it will automatically create the file if it is missing or (optionally) if the version is out-of-date.
 
-Example, with an unmanaged DLL called `Interop.CoreScanner.dll`:
+Example, with an unmanaged DLL called `Interop.CoreScanner.dll`, which I expect to exist in the same folder where my application is executing from:
 
 ```csharp
-	private static void HandleUnmanagedDependencies()
+	// The full path where you expect the dependency to exist on disk
+	// Helper methods are included to provide easy access to the directory
+	// where your assmebly is being executed from (which is where
+	// you typically need to place unmanaged dependencies).
+	var expectedPath = AssemblyUtilities.ExecutingAssemblyPath + "Interop.CoreScanner.dll";
+
+	// The dependency as a byte array, stored in your library's Properties/Resources.resx file
+	var dependency = Resources.Interop_CoreScanner;
+
+	// (optional) the expected version of the dependency on disk
+	var expectedVersion = new Version(1, 0, 1);
+
+	var dependencies = new List<UnmanagedDependency>()
 	{
-		var dependencies = new List<UnmanagedDependency>()
-		{
-			new UnmanagedDependency(
-				AssemblyUtilities.ExecutingAssemblyPath + "Interop.CoreScanner.dll",
-				Resources.Interop_CoreScanner)
-		};
+		new UnmanagedDependency(expectedPath, dependency, expectedVersion)
+	};
 
-		var dependencyManager = new DependencyManager();
+	var dependencyManager = new DependencyManager();
 
-		dependencyManager.VerifyDependenciesAndExtractIfMissing(dependencies);
-	}
+	dependencyManager.VerifyDependenciesAndExtractIfMissing(dependencies);
 ```
