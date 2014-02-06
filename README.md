@@ -89,7 +89,7 @@ If you need to update the unmanaged dependency in the future, just remove the ol
 
 ## Advanced Example
 
-DependencySharp also contains an overloaded method for executing an [`Action`](http://msdn.microsoft.com/en-us/library/system.action%28v=vs.110%29.aspx) after the unmanaged dependency is written to disk.
+DependencySharp also contains a method for executing an [`Action`](http://msdn.microsoft.com/en-us/library/system.action%28v=vs.110%29.aspx) after the unmanaged dependency is written to disk.
 
 For example, I recently worked with some hardware that required dozens of unmanaged libraries to interact with the system. Instead of adding each individual library to my managed library, I used [7-Zip](http://www.7-zip.org/) to create a self-extracting executable which cointained all required libraries, and bundled that with my managed library. After the executable was extracted, I used an `Action` to provide commands to extract the bundle on disk.
 
