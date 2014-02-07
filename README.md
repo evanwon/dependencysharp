@@ -13,7 +13,7 @@ These "self-contained" libraries are capable of managing their own unmanaged dep
 
 ## Purpose of this library
 
-Unmanaged COM libraries are often required for interaction with 3rd-party system, and may be provided by an external vendor so you don't have access to its source.
+Unmanaged COM libraries are often required for interaction with 3rd-party systems, and may be provided by an external vendor so you don't have access to its source.
 
 There are three basic types of libraries in the Windows world:
 
