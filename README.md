@@ -107,8 +107,6 @@ private static void HandleUnmanagedDependencies()
 							   new UnmanagedDependency(expectedPath, dependency)
 						   };
 
-	var dependencyManager = new DependencyManager();
-
 	// This action will be executed after the dependencies are extracted
 	var postExtractAction = new Action(
 		() =>
@@ -133,7 +131,8 @@ private static void HandleUnmanagedDependencies()
 					process.WaitForExit(30000);
 				}
 			});
-
+			
+	var dependencyManager = new DependencyManager();
 	dependencyManager.VerifyDependenciesAndExtractIfMissingThenPerformAction(dependencies, postExtractAction);
 }
 ```
