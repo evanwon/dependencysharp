@@ -25,7 +25,7 @@ DependencySharp helps with the second type: **unmanaged, registry-free COM** lib
 
 Unmanaged COM dependencies can be cumbersome when deploying software with the ClickOnce deployment system. ClickOnce was built to deal with *managed* dependencies, and it does a great job with those. It's so easy you probably don't even think about it; managed depenedencies are identified by the system and automatically included in your deployment.
 
-To deploy *unmanaged* dependencies with ClickOnce, you'd normally have to misuse Visual Studio's build parameters to include the dependency as "content" in your project (not a Reference). NuGet can help automate this process, but you have to script out a `install` PowerShell script to configure the dependencies in the project. If you need your end-users to update your managed library and also its unmanaged dependencies, this can get even trickier.
+To deploy *unmanaged* dependencies with ClickOnce, you'd normally have to misuse Visual Studio's build parameters to include the dependency as "content" in your project (not a Reference). NuGet can help automate this process, but you have to script out an `install` PowerShell script to configure the dependencies in the project. If you need your end-users to update your managed library and also its unmanaged dependencies, this can get even trickier.
 
 DependencySharp lets you piggy-back unmanaged libraries within a managed library, to create what I call a "self-contained DLL". This is possible because unmanaged libraries only need to exist *at runtime*, and they aren't required for compilation. 
 
@@ -91,7 +91,7 @@ If you need to update the unmanaged dependency in the future, just remove the ol
 
 DependencySharp also contains a method for executing an [`Action`](http://msdn.microsoft.com/en-us/library/system.action%28v=vs.110%29.aspx) after the unmanaged dependency is written to disk.
 
-For example, I recently worked with some hardware that required dozens of unmanaged libraries to interact with the system. Instead of adding each individual library to my managed library, I used [7-Zip](http://www.7-zip.org/) to create a self-extracting executable which cointained all required libraries, and bundled that with my managed library. After the executable was extracted, I used an `Action` to provide commands to extract the bundle on disk.
+For example, I recently worked with some hardware that required dozens of unmanaged libraries to interact with the system. Instead of adding each individual library to my managed library, I used [7-Zip](http://www.7-zip.org/) to create a self-extracting executable which contained all required libraries, and bundled that with my managed library. After the executable was extracted, I used an `Action` to provide commands to extract the bundle on disk.
 
 ```csharp
 private static void HandleUnmanagedDependencies()
