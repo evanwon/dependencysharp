@@ -67,7 +67,7 @@ using DependencySharp;
 // Helper methods are included to provide easy access to the directory
 // where your assmebly is being executed from (which is where
 // you typically need to place unmanaged dependencies).
-var expectedPath = Path.Join(AssemblyUtilities.ExecutingAssemblyPath, "Interop.CoreScanner.dll");
+var expectedPath = Path.Combine(AssemblyUtilities.ExecutingAssemblyPath, "Interop.CoreScanner.dll");
 
 // The dependency as a byte array, stored in your library's Properties/Resources.resx file
 var dependency = Resources.Interop_CoreScanner;
@@ -113,7 +113,7 @@ private static void HandleUnmanagedDependencies()
 			{
 				// Look for a known dependency stored within the self-extracting
 				// executable. If it doesn't exist, expand the executable
-				if (!File.Exists(Path.Join(AssemblyDirectory, "SerialPorts.dll")))
+				if (!File.Exists(Path.Combine(AssemblyDirectory, "SerialPorts.dll")))
 				{
 					var processStartInfo = new ProcessStartInfo()
 											   {
