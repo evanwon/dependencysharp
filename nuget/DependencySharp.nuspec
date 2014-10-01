@@ -2,15 +2,21 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>DependencySharp</id>
-        <version>1.0.2</version>
+        <version>1.1.0</version>
         <title>DependencySharp</title>
         <authors>Evan Wondrasek</authors>
         <projectUrl>https://github.com/evanwon/dependencysharp</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Unmanaged Dependencies Suck™
-This library allows you to embed unmanaged dependencies within your managed code (as a byte array), and at runtime check if the dependency exists in a specified location. If it doesn't, the dependency is automatically written to the correct location.</description>
-        <releaseNotes>Fixed: If file exists (but is wrong filesize or version), tries to make file writeable before overwriting it with a new file.</releaseNotes>
-        <copyright>Copyright © Evan Wondrasek 2013</copyright>
+        <description>DependencySharp allows you to embed unmanaged COM libraries within your managed library (as a byte array), and at runtime check if the unmanaged library exists in a specified location. If it doesn't, the library is automatically written to the specified location.
+
+These "self-contained" libraries are capable of managing their own unmanaged dependencies, providing a convenient way for your end-user to use and deploy your managed library.
+
+Full documentation and usage examples: https://github.com/evanwon/dependencysharp/blob/master/README.md
+
+DependencySharp is open-source: https://github.com/evanwon/dependencysharp</description>
+        <releaseNotes>Version 1.1.0 (2014-10-01, Evan Wondrasek):
+- Added overloaded methods to take single dependency</releaseNotes>
+        <copyright>Copyright © Evan Wondrasek / Apricity Software LLC 2014</copyright>
         <tags>dependency</tags>
         <frameworkAssemblies>
             <frameworkAssembly assemblyName="System" targetFramework="" />

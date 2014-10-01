@@ -56,15 +56,15 @@ namespace DependencySharp
         /// verifies its size in bytes is correct, and (optionally) its version is correct. If the dependency 
         /// fails one of those tests, it will be written to the provided location.
         /// </summary>
-        /// <param name="dependencies">A collection of type UnmanagedDependency that describes the path of 
+        /// <param name="unmanagedDependencies">A collection of type UnmanagedDependency that describes the path of 
         /// the dependency, a byte array representing the contents of the dependency, its file size 
         /// (automatically derived from the length of the byte array), and (optionally) its version.</param>
         /// <returns>True if dependencies were extracted, false if the dependencies already existed.</returns>
-        public bool VerifyDependenciesAndExtractIfMissing(IEnumerable<UnmanagedDependency> dependencies)
+        public bool VerifyDependenciesAndExtractIfMissing(IEnumerable<UnmanagedDependency> unmanagedDependencies)
         {
             var dependenciesExtracted = false;
 
-            foreach (var dependency in dependencies)
+            foreach (var dependency in unmanagedDependencies)
             {
                 Debug.WriteLine("Processing dependency: " + dependency.DependencyPath);
 
@@ -104,20 +104,58 @@ namespace DependencySharp
         }
 
         /// <summary>
+        /// Checks if a dependency exists at the path specifed, 
+        /// verifies its size in bytes is correct, and (optionally) its version is correct. If the dependency 
+        /// fails one of those tests, it will be written to the provided location.
+        /// </summary>
+        /// <param name="unmanagedDependency">An UnmanagedDependency that describes the path of 
+        /// the dependency, a byte array representing the contents of the dependency, its file size 
+        /// (automatically derived from the length of the byte array), and (optionally) its version.</param>
+        /// <returns>True if dependency was extracted, false if the dependency already existed.</returns>
+        public bool VerifyDependenciesAndExtractIfMissing(UnmanagedDependency unmanagedDependency)
+        {
+            return VerifyDependenciesAndExtractIfMissing(new List<UnmanagedDependency> {unmanagedDependency});
+        }
+
+        /// <summary>
         /// For each provided dependency, checks if a dependency exists at the path specifed, 
         /// verifies its size in bytes is correct, and (optionally) its version is correct. If the dependency 
         /// fails one of those tests, it will be written to the provided location.
         /// If the dependency was written to disk, executes a custom action specified by the user. This 
         /// could be used for registring a DLL, triggering a process, etc.
         /// </summary>
-        /// <param name="dependencies">A collection of type UnmanagedDependency that describes the path of 
+        /// <param name="unmanagedDependencies">A collection of type UnmanagedDependency that describes the path of 
         /// the dependency, a byte array representing the contents of the dependency, its file size 
         /// (automatically derived from the length of the byte array), and (optionally) its version.</param>
         /// <param name="action"></param>
         public void VerifyDependenciesAndExtractIfMissingThenPerformAction(
-            IEnumerable<UnmanagedDependency> dependencies, Action action)
+            IEnumerable<UnmanagedDependency> unmanagedDependencies, Action action)
         {
-            var dependenciesExtracted = VerifyDependenciesAndExtractIfMissing(dependencies);
+            var dependenciesExtracted = VerifyDependenciesAndExtractIfMissing(unmanagedDependencies);
+
+            // Only execute the action if the dependencies didn't exist
+            if (dependenciesExtracted)
+            {
+                action();
+            }
+        }
+
+        /// <summary>
+        /// Checks if a dependency exists at the path specifed, 
+        /// verifies its size in bytes is correct, and (optionally) its version is correct. If the dependency 
+        /// fails one of those tests, it will be written to the provided location.
+        /// If the dependency was written to disk, executes a custom action specified by the user. This 
+        /// could be used for registring a DLL, triggering a process, etc.
+        /// </summary>
+        /// <param name="unmanagedDependency">An UnmanagedDependency that describes the path of 
+        /// the dependency, a byte array representing the contents of the dependency, its file size 
+        /// (automatically derived from the length of the byte array), and (optionally) its version.</param>
+        /// <returns>True if dependency was extracted, false if the dependency already existed.</returns>
+        /// <param name="action"></param>
+        public void VerifyDependenciesAndExtractIfMissingThenPerformAction(
+            UnmanagedDependency unmanagedDependency, Action action)
+        {
+            var dependenciesExtracted = VerifyDependenciesAndExtractIfMissing(unmanagedDependency);
 
             // Only execute the action if the dependencies didn't exist
             if (dependenciesExtracted)
