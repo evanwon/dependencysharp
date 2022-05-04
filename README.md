@@ -45,7 +45,7 @@ The result: your end-user gets a single dependency that takes care of its own de
 ### Cons
 
 - Developers of the self-contained libraries need to know what they're doing
-- Minor development overheard to build the self-contained library
+- Minor development overhead to build the self-contained library
 - Potential for exceptions if unmanaged libraries can't be written to disk (although ClickOnce's deployment location is in a per-user, writable location)
 
 ## Basic Usage ##
